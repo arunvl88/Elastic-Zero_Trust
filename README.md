@@ -110,7 +110,7 @@ http://localhost:5601
 
 You should see the Kibana web interface.
 
-- Ports
+- If not verify the following ports are open
     
     **Kibana:** **5601**
     
@@ -161,6 +161,27 @@ You should see the Kibana web interface.
         
     
     https://www.elastic.co/guide/en/kibana/current/settings.html
+
+### Initial login to the Elastic dashboard
+
+  - When you initially login to Elastic dashboard, you will see the following:
+ 
+<img width="791" alt="image" src="https://github.com/arunvl88/Elastic-Zero_Trust/assets/7003647/82a80192-e801-49a3-8d50-e162815ac0e6">
+
+One method to obtain enrollment token is from the CLI:
+
+`/usr/share/elasticsearch/bin/elasticsearch-create-enrollment-token --scope kibana`
+
+Once entering the enrollment token, you will be asked to enter the username and password.
+Deafult username and password was not working for me.
+
+<img width="747" alt="image" src="https://github.com/arunvl88/Elastic-Zero_Trust/assets/7003647/736d618c-8752-4530-a49d-d875dade013f">
+
+However, I had to reset the password as I don’t remeber if the password was set during the setup:
+
+navigate to: `cd /usr/share/elasticsearch/bin/`
+
+`/usr/share/elasticsearch/bin# ./elasticsearch-reset-password -u elastic`
 
 ## References
 
