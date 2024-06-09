@@ -254,3 +254,10 @@ curl --location \
 - Default port for the HTTP Endpoint is *9560*.
 - When using the same port for more than one dataset, be sure to specify different dataset paths.
 - Example: `https://logs.example.com?header_Authorization=Basic%20REDACTED&tags=host:theburritobot.com,dataset:http_requests`
+
+## Searching for contents
+
+`data_stream.dataset: "cloudflare_logpush.workers_trace"`
+
+<img width="1744" alt="image" src="https://github.com/arunvl88/Elastic-Zero_Trust/assets/7003647/98793b3a-930c-41d6-8184-58a50b5f938a">
+
