@@ -204,7 +204,10 @@ The Cloudflare Logpush integration can be used in three different modes to colle
 
 <img width="1348" alt="image" src="https://github.com/arunvl88/Elastic-Zero_Trust/assets/7003647/887f32c9-4269-4c05-9b19-a07fe6a49399">
 
-6. Click 'save and continue'
+6. Change the listent host to `0.0.0.0` > 'save and continue'
+
+<img width="789" alt="image" src="https://github.com/arunvl88/Elastic-Zero_Trust/assets/7003647/d794ad50-47ec-4cff-b5f0-552f5d5734b2">
+
 7. Click 'Add Elastic Agent to your hosts' and chose 'Run standalone'
 
 <img width="1709" alt="image" src="https://github.com/arunvl88/Elastic-Zero_Trust/assets/7003647/39f148a8-fe2a-4238-bcaf-e50d2a8b3535">
@@ -221,6 +224,7 @@ cd elastic-agent-8.13.4-linux-x86_64
 sudo ./elastic-agent install
 ```
 
+10. Copy the Elastic-agent.yml conents copied in in step 8 to /opt/Elastic/Agent folder.
 
 10. Next step: Configure Cloudflare to send logs to the Elastic Agent.
 
