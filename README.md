@@ -104,3 +104,48 @@ You should see the Kibana web interface.
 
 - [Elasticsearch Installation Guide](https://www.elastic.co/guide/en/elasticsearch/reference/current/deb.html)
 - [Kibana Installation Guide](https://www.elastic.co/guide/en/kibana/current/deb.html)
+
+### **Enabling the Cloudflare Log Push integration in Elastic**
+
+The Cloudflare Logpush integration can be used in three different modes to collect data:
+
+- HTTP Endpoint mode - Cloudflare pushes logs directly to an HTTP endpoint hosted by your Elastic Agent.
+- AWS S3 polling mode - Cloudflare writes data to S3 and Elastic Agent polls the S3 bucket by listing its contents and reading new files.
+- AWS S3 SQS mode - Cloudflare writes data to S3, S3 pushes a new object notification to SQS, Elastic Agent receives the notification from SQS, and then reads the S3 object. Multiple Agents can be used in this mode.
+
+I chose HTTP Endpoint mode.
+
+1. In Kibana, go to Management > Integrations
+2. In the integrations search bar type **Cloudflare Logpush**.
+3. Click the **Cloudflare Logpush** integration from the search results.
+4. Click the **Add Cloudflare Logpush** button to add Cloudflare Logpush integration.
+5. Enable the Integration with the HTTP Endpoint, AWS S3 input or GCS input.
+6. Under the AWS S3 input, there are two types of inputs: using AWS S3 Bucket or using SQS.
+7. Configure Cloudflare to send logs to the Elastic Agent.
+
+### **To collect data from the Cloudflare HTTP Endpoint, follow the below steps:**
+
+- Reference link to [**Enable HTTP destination**](https://developers.cloudflare.com/logs/get-started/enable-destinations/http/) for Cloudflare Logpush.
+- Add same custom header along with its value on both the side for additional security.
+- For example, while creating a job along with a header and value for a particular dataset:
+
+```arduino
+curl --location --request POST 'https://api.cloudflare.com/client/v4/zones/<ZONE ID>/logpush/jobs' \
+--header 'X-Auth-Key: <X-AUTH-KEY>' \
+--header 'X-Auth-Email: <X-AUTH-EMAIL>' \
+--header 'Authorization: <BASIC AUTHORIZATION>' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "name":"<public domain>",
+    "destination_conf": "https://<public domain>:<public port>/<dataset path>?header_Content-Type=application/json&header_<secret_header>=<secret_value>",
+    "dataset": "audit",
+    "logpull_options": "fields=RayID,EdgeStartTimestamp&timestamps=rfc3339"
+}'
+```
+
+**Note**:
+
+- The destination_conf parameter inside the request data should set the Content-Type header to **`application/json`**. This is the content type that the HTTP endpoint expects for incoming events.
+- Default port for the HTTP Endpoint is *9560*.
+- When using the same port for more than one dataset, be sure to specify different dataset paths.
+- Example: `https://logs.example.com?header_Authorization=Basic%20REDACTED&tags=host:theburritobot.com,dataset:http_requests`
