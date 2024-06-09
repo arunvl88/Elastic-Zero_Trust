@@ -202,9 +202,17 @@ I chose HTTP Endpoint mode.
 2. In the integrations search bar type **Cloudflare Logpush**.
 3. Click the **Cloudflare Logpush** integration from the search results.
 4. Click the **Add Cloudflare Logpush** button to add Cloudflare Logpush integration.
-5. Enable the Integration with the HTTP Endpoint, AWS S3 input or GCS input.
-6. Under the AWS S3 input, there are two types of inputs: using AWS S3 Bucket or using SQS.
-7. Configure Cloudflare to send logs to the Elastic Agent.
+5. Enable the Integration with the HTTP Endpoint, AWS S3 input or GCS input. I chose 'HTTP endpoint'
+
+<img width="1348" alt="image" src="https://github.com/arunvl88/Elastic-Zero_Trust/assets/7003647/887f32c9-4269-4c05-9b19-a07fe6a49399">
+
+6. Click 'save and continue'
+7. Click 'Add Elastic Agent to your hosts' and chose 'Run standalone'
+
+<img width="1709" alt="image" src="https://github.com/arunvl88/Elastic-Zero_Trust/assets/7003647/39f148a8-fe2a-4238-bcaf-e50d2a8b3535">
+
+8. Copy the elastic-agent.yml file 
+9. Next step: Configure Cloudflare to send logs to the Elastic Agent.
 
 ### **To collect data from the Cloudflare HTTP Endpoint, follow the below steps:**
 
