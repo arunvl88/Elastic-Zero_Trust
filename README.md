@@ -1,4 +1,15 @@
-# Elastic Stack Installation and Configuration on Ubuntu VM
+## Introduction
+
+This documentation provides a comprehensive guide to installing and configuring the Elastic Stack, which includes Elasticsearch and Kibana, on an Ubuntu VM. The Elastic Stack is a powerful suite of tools for searching, analyzing, and visualizing data in real-time, making it ideal for various applications, including monitoring, security analytics, and operational intelligence.
+
+In this guide, we will cover the following:
+
+1. **Installation of Elasticsearch and Kibana**: Step-by-step instructions to set up and configure Elasticsearch and Kibana on an Ubuntu VM.
+2. **Integration with Cloudflare Log Push**: Instructions on how to integrate Cloudflare Log Push to send logs directly to your Elasticsearch instance, enabling you to monitor and analyze traffic and security data from Cloudflare.
+3. **Sending Cloudflare Zero Trust Logs to Elastic Agent Endpoint**: Detailed steps to configure Cloudflare Zero Trust logs and send them to the Elastic Agent endpoint for centralized log management and advanced analytics.
+
+   
+## Elastic Stack Installation and Configuration on Ubuntu VM
 
 This guide provides step-by-step instructions to install and configure Elasticsearch and Kibana on an Ubuntu VM.
 
