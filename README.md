@@ -104,12 +104,63 @@ You should receive a JSON response containing information about your Elasticsear
 To verify that Kibana is running, open a web browser and navigate to:
 
 ```arduino
-arduinoCopy code
 http://localhost:5601
 
 ```
 
 You should see the Kibana web interface.
+
+- Ports
+    
+    **Kibana:** **5601**
+    
+    **Elasticsearch:** **9200** (HTTP communication) and **9300** (internal node communication)
+    
+    ```arduino
+    netstat -tnlp
+    (Not all processes could be identified, non-owned process info
+    will not be shown, you would have to be root to see it all.)
+    Active Internet connections (only servers)
+    Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name
+    
+    tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN      -
+    
+    tcp        0      0 127.0.0.1:5601          0.0.0.0:*               LISTEN      -
+    
+    tcp        0      0 127.0.0.53:53           0.0.0.0:*               LISTEN      -
+    
+    tcp6       0      0 :::9200                 :::*                    LISTEN      -
+    
+    tcp6       0      0 :::22                   :::*                    LISTEN      -
+    
+    tcp6       0      0 127.0.0.1:9300          :::*                    LISTEN      -
+    
+    tcp6       0      0 ::1:9300                :::*                    LISTEN      -  Ports
+    ```
+    
+- Allow remote users to access Kibana
+    
+    Here's how you can do it:
+    
+    1. Open the Kibana configuration file (**`kibana.yml`**) using a text editor. Typically, it's located in **`/etc/kibana/`**.
+    2. Look for the **`server.host`** option in the **`kibana.yml`** file.
+    3. Set the **`server.host`** option to either the external IP address of the VM (**`10.0.0.208`**) or **`0.0.0.0`** to bind to all available network interfaces.
+        
+        
+        ```arduino
+        server.host: "0.0.0.0"
+        ```
+        
+    4. Save the changes to the **`kibana.yml`** file.
+    5. Restart the Kibana service to apply the changes:
+        
+        ```
+        sudo systemctl restart kibana
+        
+        ```
+        
+    
+    https://www.elastic.co/guide/en/kibana/current/settings.html
 
 ## References
 
