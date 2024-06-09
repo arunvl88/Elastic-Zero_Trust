@@ -257,6 +257,8 @@ curl --location \
 
 ## Searching for contents
 
+Navigate to Analytics > Discover and search for following:
+
 `data_stream.dataset: "cloudflare_logpush.workers_trace"`
 
 <img width="1744" alt="image" src="https://github.com/arunvl88/Elastic-Zero_Trust/assets/7003647/98793b3a-930c-41d6-8184-58a50b5f938a">
