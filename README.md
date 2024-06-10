@@ -263,3 +263,18 @@ Navigate to Analytics > Discover and search for following:
 
 <img width="1744" alt="image" src="https://github.com/arunvl88/Elastic-Zero_Trust/assets/7003647/98793b3a-930c-41d6-8184-58a50b5f938a">
 
+## Troubleshooting:
+### Hugh memory consumption:
+I observed elastic process of consuming very high memory (10 GB) out of 12 GB available in the system.
+
+Edited:
+```
+sudo nano /etc/elasticsearch/jvm.options
+```
+
+Adjust the -Xms and -Xmx settings to lower values. For example:
+
+```
+-Xms4g
+-Xmx4g
+```
