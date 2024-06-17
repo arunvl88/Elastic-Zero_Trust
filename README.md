@@ -278,3 +278,155 @@ Adjust the -Xms and -Xmx settings to lower values. For example:
 -Xms4g
 -Xmx4g
 ```
+## Integrating Sysmon for Linux with Elastic Stack
+
+This guide provides instructions for setting up Sysmon for Linux, integrating it with the Elastic Stack, bringing up an Elastic Fleet server, installing the Elastic Agent on Linux servers, registering them with the Fleet server, and pushing Sysmon policies to the Elastic Agent from the Fleet dashboard.
+
+### Prerequisites
+
+- An operational Elasticsearch and Kibana setup.
+- Sudo privileges on the Linux servers.
+
+### Steps
+
+### 1. Bringing Up the Fleet Server
+
+### Install the Elastic Agent with Fleet Server
+
+1. **Download and Extract the Elastic Agent**:
+    
+    ```bash
+    bashCopy code
+    curl -L -O https://artifacts.elastic.co/downloads/beats/elastic-agent/elastic-agent-8.13.3-linux-x86_64.tar.gz
+    tar xzvf elastic-agent-8.13.3-linux-x86_64.tar.gz
+    cd elastic-agent-8.13.3-linux-x86_64
+    
+    ```
+    
+2. **Install the Elastic Agent with Fleet Server Configuration**:
+    
+    ```bash
+    bashCopy code
+    sudo ./elastic-agent install \
+      --fleet-server-es=https://<elasticsearch_ip>:9200 \
+      --fleet-server-service-token=<service_token> \
+      --fleet-server-policy=fleet-server-policy \
+      --fleet-server-es-ca-trusted-fingerprint=<es_ca_fingerprint> \
+      --fleet-server-port=8220
+    
+    ```
+    
+
+Replace `<elasticsearch_ip>`, `<service_token>`, and `<es_ca_fingerprint>` with your specific details.
+
+### 2. Installing Elastic Agent on Linux Servers
+
+1. **Download and Extract the Elastic Agent**:
+    
+    ```bash
+    bashCopy code
+    curl -L -O https://artifacts.elastic.co/downloads/beats/elastic-agent/elastic-agent-8.13.3-linux-x86_64.tar.gz
+    tar xzvf elastic-agent-8.13.3-linux-x86_64.tar.gz
+    cd elastic-agent-8.13.3-linux-x86_64
+    
+    ```
+    
+2. **Enroll the Elastic Agent with the Fleet Server**:
+    
+    ```bash
+    bashCopy code
+    sudo ./elastic-agent install \
+      --url=https://<fleet_server_ip>:8220 \
+      --enrollment-token=<enrollment_token> \
+      --certificate-authorities=/path/to/ca.crt
+    
+    ```
+    
+
+Replace `<fleet_server_ip>` and `<enrollment_token>` with your specific details, and `/path/to/ca.crt` with the path to your CA certificate file if using a self-signed certificate.
+
+### 3. Registering Agents with the Fleet Server
+
+1. **Access Kibana**:
+Open your web browser and navigate to your Kibana instance.
+2. **Navigate to Fleet**:
+Go to **Management** > **Fleet** > **Agents**. You should see the newly installed agents listed here.
+
+### 4. Pushing Sysmon Policies to Elastic Agents
+
+### Create and Configure a Sysmon Policy
+
+1. **Create Sysmon Configuration File**:
+Save the following XML content as `sysmon-config.xml`:
+    
+    ```xml
+    xmlCopy code
+    <Sysmon schemaversion="4.30">
+      <EventFiltering>
+        <RuleGroup name="default" groupRelation="or">
+          <ProcessCreate onmatch="include"/>
+          <NetworkConnect onmatch="include"/>
+          <FileCreateTime onmatch="include"/>
+        </RuleGroup>
+      </EventFiltering>
+    </Sysmon>
+    
+    ```
+    
+2. **Install Sysmon for Linux**:
+Use the following commands to install Sysmon for Linux:
+    
+    ```bash
+    bashCopy code
+    wget -q https://packages.microsoft.com/config/ubuntu/$(lsb_release -rs)/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
+    sudo dpkg -i packages-microsoft-prod.deb
+    sudo apt-get update
+    sudo apt-get install sysmonforlinux
+    
+    ```
+    
+3. **Start Sysmon with the Configuration**:
+    
+    ```bash
+    bashCopy code
+    sudo sysmon -accepteula -i /etc/sysmon/sysmon-config.xml
+    
+    ```
+    
+
+### Add Sysmon Integration in Kibana
+
+1. **Navigate to Fleet Policies**:
+    - Go to **Management** > **Fleet** > **Policies**.
+    - Select the policy assigned to your Elastic Agent.
+2. **Add System Integration**:
+    - Click on **Add Integration**.
+    - Search for **System** and select it.
+    - In the integration setup, configure it to collect logs from `/var/log/syslog`.
+3. **Apply and Save the Configuration**:
+Save the changes and ensure the integration is applied to the policy.
+
+### 5. Verifying the Setup
+
+1. **Generate Test Logs**:
+Create a test log entry:
+    
+    ```bash
+    bashCopy code
+    sudo logger "This is a test log entry for syslog"
+    
+    ```
+    
+2. **Verify Logs in Kibana**:
+    - Go to **Kibana** > **Discover**.
+    - Select the appropriate index pattern (e.g., `logs-*`).
+    - Verify that the logs from `/var/log/syslog` are being displayed, including the test log entry.
+
+### Summary
+
+- **Set up the Fleet server** using the Elastic Agent.
+- **Install and enroll Elastic Agents** on various Linux machines.
+- **Create and apply Sysmon policies**.
+- **Verify log collection and integration** in Kibana.
+
+By following these steps, you can ensure that Sysmon logs are collected from various Linux machines and integrated into the Elastic Stack for monitoring and analysis.
