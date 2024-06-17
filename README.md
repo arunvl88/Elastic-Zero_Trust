@@ -360,7 +360,6 @@ Go to **Management** > **Fleet** > **Agents**. You should see the newly installe
 Save the following XML content as `sysmon-config.xml`:
     
     ```xml
-    xmlCopy code
     <Sysmon schemaversion="4.30">
       <EventFiltering>
         <RuleGroup name="default" groupRelation="or">
@@ -377,7 +376,6 @@ Save the following XML content as `sysmon-config.xml`:
 Use the following commands to install Sysmon for Linux:
     
     ```bash
-    bashCopy code
     wget -q https://packages.microsoft.com/config/ubuntu/$(lsb_release -rs)/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
     sudo dpkg -i packages-microsoft-prod.deb
     sudo apt-get update
@@ -388,7 +386,6 @@ Use the following commands to install Sysmon for Linux:
 3. **Start Sysmon with the Configuration**:
     
     ```bash
-    bashCopy code
     sudo sysmon -accepteula -i /etc/sysmon/sysmon-config.xml
     
     ```
@@ -412,7 +409,6 @@ Save the changes and ensure the integration is applied to the policy.
 Create a test log entry:
     
     ```bash
-    bashCopy code
     sudo logger "This is a test log entry for syslog"
     
     ```
