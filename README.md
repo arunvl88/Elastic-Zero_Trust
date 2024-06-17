@@ -7,7 +7,7 @@ In this guide, we will cover the following:
 1. **Installation of Elasticsearch and Kibana**: Step-by-step instructions to set up and configure Elasticsearch and Kibana on an Ubuntu VM.
 2. **Integration with Cloudflare Log Push**: Instructions on how to integrate Cloudflare Log Push to send logs directly to your Elasticsearch instance, enabling you to monitor and analyze traffic and security data from Cloudflare.
 3. **Sending Cloudflare Zero Trust Logs to Elastic Agent Endpoint**: Detailed steps to configure Cloudflare Zero Trust logs and send them to the Elastic Agent endpoint for centralized log management and advanced analytics.
-
+4. **Sending Syslog from Various Linux Machines to Elastic Fleet Server**: Instructions on configuring syslog on different Linux machines to forward logs to the Elastic Fleet server and setting up the Sysmon for Linux integration in Kibana for enhanced log monitoring and analysis.
    
 ## Elastic Stack Installation and Configuration on Ubuntu VM
 
