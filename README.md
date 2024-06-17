@@ -323,6 +323,10 @@ Replace `<elasticsearch_ip>`, `<service_token>`, and `<es_ca_fingerprint>` with 
 
 ### 2. Installing Elastic Agent on Linux Servers
 
+<img width="927" alt="image" src="https://github.com/arunvl88/Elastic-Zero_Trust/assets/7003647/c67ad363-29f9-41fc-8a85-c17c68df29c3">
+
+You can get the below commands from Kibana Dashboard > Fleet > Add Agents > Chose Agent Policy > Enroll in Fleet.
+
 1. **Download and Extract the Elastic Agent**:
     
     ```bash
