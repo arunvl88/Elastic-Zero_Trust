@@ -329,19 +329,15 @@ Replace `<elasticsearch_ip>`, `<service_token>`, and `<es_ca_fingerprint>` with 
     curl -L -O https://artifacts.elastic.co/downloads/beats/elastic-agent/elastic-agent-8.13.3-linux-x86_64.tar.gz
     tar xzvf elastic-agent-8.13.3-linux-x86_64.tar.gz
     cd elastic-agent-8.13.3-linux-x86_64
-    
     ```
     
 2. **Enroll the Elastic Agent with the Fleet Server**:
     
     ```bash
 sudo ./elastic-agent install \
-  --fleet-server-es=https://10.0.0.208:9200 \
-  --fleet-server-service-token=enrollment_token> \
-  --fleet-server-policy=fleet-server-policy \
-  --fleet-server-es-ca-trusted-fingerprint=<fingerprint> \
-  --fleet-server-port=8220
-    
+  --url=https://10.0.0.202:8220 \
+  --enrollment-token=<enrollment_token> \
+  --insecure
     ```
     
 
