@@ -422,6 +422,11 @@ Create a test log entry:
     - Go to **Kibana** > **Discover**.
     - Select the appropriate index pattern (e.g., `logs-*`).
     - Verify that the logs from `/var/log/syslog` are being displayed, including the test log entry.
+  
+From Kibana Dashboard > [Logs System]
+  
+<img width="1908" alt="image" src="https://github.com/arunvl88/Elastic-Zero_Trust/assets/7003647/f47b15e1-c689-4cb9-997a-efc7469a6141">
+
 
 ### Summary
 
