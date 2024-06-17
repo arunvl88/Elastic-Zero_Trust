@@ -333,12 +333,12 @@ Replace `<elasticsearch_ip>`, `<service_token>`, and `<es_ca_fingerprint>` with 
     
 2. **Enroll the Elastic Agent with the Fleet Server**:
     
-    ```bash
+```
 sudo ./elastic-agent install \
   --url=https://10.0.0.202:8220 \
   --enrollment-token=<enrollment_token> \
   --insecure
-    ```
+ ```
     
 
 Replace `<fleet_server_ip>` and `<enrollment_token>` with your specific details, and `/path/to/ca.crt` with the path to your CA certificate file if using a self-signed certificate.
