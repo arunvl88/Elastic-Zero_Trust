@@ -291,8 +291,6 @@ This guide provides instructions for setting up Sysmon for Linux, integrating it
 
 ### 1. Bringing Up the Fleet Server
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/3c83a61c-39c0-4fe9-95ca-a07c08c9dbd7/381bfc68-1fd4-4a35-ac7a-0399add41e30/Untitled.png)
-
 ### Install the Elastic Agent with Fleet Server
 
 <img width="934" alt="image" src="https://github.com/arunvl88/Elastic-Zero_Trust/assets/7003647/9c106e83-4900-40f1-9943-772f9d815a3d">
@@ -396,6 +394,9 @@ Use the following commands to install Sysmon for Linux:
     
 
 ### Add Sysmon Integration in Kibana
+
+<img width="785" alt="image" src="https://github.com/arunvl88/Elastic-Zero_Trust/assets/7003647/40468d80-f145-44e6-9e35-d2122da0155f">
+
 
 1. **Navigate to Fleet Policies**:
     - Go to **Management** > **Fleet** > **Policies**.
