@@ -291,12 +291,17 @@ This guide provides instructions for setting up Sysmon for Linux, integrating it
 
 ### 1. Bringing Up the Fleet Server
 
+![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/3c83a61c-39c0-4fe9-95ca-a07c08c9dbd7/381bfc68-1fd4-4a35-ac7a-0399add41e30/Untitled.png)
+
 ### Install the Elastic Agent with Fleet Server
+
+<img width="934" alt="image" src="https://github.com/arunvl88/Elastic-Zero_Trust/assets/7003647/9c106e83-4900-40f1-9943-772f9d815a3d">
+
+These commands will be given when you go to Kibana Dashboard > Fleet > Add Fleet Server
 
 1. **Download and Extract the Elastic Agent**:
     
     ```bash
-    bashCopy code
     curl -L -O https://artifacts.elastic.co/downloads/beats/elastic-agent/elastic-agent-8.13.3-linux-x86_64.tar.gz
     tar xzvf elastic-agent-8.13.3-linux-x86_64.tar.gz
     cd elastic-agent-8.13.3-linux-x86_64
@@ -306,7 +311,6 @@ This guide provides instructions for setting up Sysmon for Linux, integrating it
 2. **Install the Elastic Agent with Fleet Server Configuration**:
     
     ```bash
-    bashCopy code
     sudo ./elastic-agent install \
       --fleet-server-es=https://<elasticsearch_ip>:9200 \
       --fleet-server-service-token=<service_token> \
@@ -324,7 +328,6 @@ Replace `<elasticsearch_ip>`, `<service_token>`, and `<es_ca_fingerprint>` with 
 1. **Download and Extract the Elastic Agent**:
     
     ```bash
-    bashCopy code
     curl -L -O https://artifacts.elastic.co/downloads/beats/elastic-agent/elastic-agent-8.13.3-linux-x86_64.tar.gz
     tar xzvf elastic-agent-8.13.3-linux-x86_64.tar.gz
     cd elastic-agent-8.13.3-linux-x86_64
@@ -334,11 +337,12 @@ Replace `<elasticsearch_ip>`, `<service_token>`, and `<es_ca_fingerprint>` with 
 2. **Enroll the Elastic Agent with the Fleet Server**:
     
     ```bash
-    bashCopy code
-    sudo ./elastic-agent install \
-      --url=https://<fleet_server_ip>:8220 \
-      --enrollment-token=<enrollment_token> \
-      --certificate-authorities=/path/to/ca.crt
+sudo ./elastic-agent install \
+  --fleet-server-es=https://10.0.0.208:9200 \
+  --fleet-server-service-token=enrollment_token> \
+  --fleet-server-policy=fleet-server-policy \
+  --fleet-server-es-ca-trusted-fingerprint=<fingerprint> \
+  --fleet-server-port=8220
     
     ```
     
